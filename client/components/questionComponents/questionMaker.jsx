@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 
-function questionMaker(props) {
+function QuestionMaker(props) {
     /* Props
     postQuestionHandler
     */
@@ -23,4 +23,4 @@ function questionMaker(props) {
     );
 }
 
-export default questionMaker;
+export default QuestionMaker;

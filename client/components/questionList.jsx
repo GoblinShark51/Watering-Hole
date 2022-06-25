@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Outlet, Link } from "react-router-dom";
-import QuestionPreview from './questionComponents/questionPreview.jsx';
+import QuestionPreview from './questionComponents/QuestionPreview.jsx';
 
-function questionList() {
-    // Declare a new state variable, which we'll call "count"  const [count, setCount] = useState(0);
-    // const [count, setCount] = useState(0);
+function QuestionList() {
+    console.log('Rendering QuestionList.jsx');
+
     const questions = GetQuestionList();
 
     const ql = [];
@@ -49,4 +49,4 @@ const GetQuestionList = function() {
     ] 
 }
 
-export default questionList;
+export default QuestionList;
