@@ -12,6 +12,15 @@ app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
-  
+//////////////////////
+
+// route 
+app.get()
+
+app.use((req, res) => {
+    res.status(404).send('404: Page not found')
+})
+
+app.use
 
 app.listen(3000);
