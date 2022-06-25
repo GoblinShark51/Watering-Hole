@@ -21,7 +21,7 @@ function questionList() {
     }
 
     const askButtonHandler = function(event) {
-
+        //This should route to the ask question page
     }
 
     return (
