@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { Outlet, Link } from "react-router-dom";
 
-function questionPreview() {
-    // Declare a new state variable, which we'll call "count"  const [count, setCount] = useState(0);
-    const [count, setCount] = useState(0);
+function questionPreview(props) {
+    /* Props
+    id
+    title
+    author
+    timestamp
+    */
     
     return (
-      <div>
-        <p>You clicked {count} times</p>
-        <button onClick={() => setCount(count + 1)}>
-          Click me
-        </button>
+      <div class='question-preview'>
+        <h3 class='preview-title'>
+            <a href='some link using props.id goes here'>{props.title}</a>
+        </h3>
+        by: {props.author}
+        timestamp: {props.timestamp}
       </div>
     );
 }
 
-export default questionList;
+export default questionPreview;
