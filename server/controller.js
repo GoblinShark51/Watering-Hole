@@ -6,13 +6,14 @@ controller = {};
 controller.createUser = (req, res, next) => {
     const {username, firstName, lastName} = req.body;
 
-    const query = `INSERT INTO user
+    const query = `INSERT INTO users
     (username, firstName, lastName)
     VALUES ('${username}', '${firstName}', '${lastName}')`
 
     dataBase.query(query)
-    .then(data => next())
-    
+        .then(data => next())
+        .catch(err => console.log(err))
+    next();
 };
 
 // GET login data: function to find user in database
