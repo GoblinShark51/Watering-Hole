@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const { createProxyMiddleware } = require('http-proxy-middleware');
+const {controller} = require('./controller');
 
 app.use('/', express.static(path.join(__dirname, '../build')));
 
@@ -10,14 +11,61 @@ app.get('/', (req, res) => {
 });
 
 //////////////////////
-
 // route 
-app.get()
+//CHECK IF USER IS IN THE DATABASE
+//* GET login data {username: x, password: none} <- CLIENT SENDS THIS TO SERVER
+                 //{username: x} <- SERVER SENDS THIS BACK (FOR NOW)
+app.get('/login', controller.getUser, (req, res) => {
+    return res.status(200).json(res.locals.getUser);
+})
 
-app.use((req, res) => {
+//CREATE USERNAME
+//* POST signup {username: x, password: none}
+app.post('/signup', controller.createUser, (req, res) => {
+    return res.status(200).json(res.locals.createUser);
+})
+
+//GET LIST OF ALL THE QUESTIONS
+//* GET questions list [{id: id, questionTitle: title, questionAuthor: theirname, timestamp: time}] (its an array)
+app.get('/getList', controller.getQuestions, (req, res) => {
+    return res.status(200).json(res.locals.getQuestions);
+})
+
+//GET A SPECIFIC QUESTION ACCORDING TO ITS ID 
+/* GET question. Client will use /:id param where id is the ID of the question
+{
+  id: id
+  questionTitle: title,
+  questionAuthor: theirname,
+  questionContent: content,
+  timestamp: time,
+  comments: [{id: id, author: theirname, content: theirtext, timestamp: time}]
+}
+*/
+app.get('/question/:id', controller.getQuestionsWithComments, (req, res) => {
+    return res.status(200).json(res.locals.getQuestionsWithComments);
+})
+//GET USER INFO(ACCOUNT INFO STRETCH)
+//* GET user info {???} idk yet
+
+//POST QUESTION TO THE DATABASE
+//* POST question {title, content, author}
+app.post('/postQuestion', controller.postQuestion, (req, res) => {
+    return res.status(200).json(res.locals.postQuestion);
+})
+
+//POST COMMENT TO THE DATABASE
+//* POST comment {author: theirname, content: theirtext}
+app.post('/postComment', controller.postComment, (req,res) => {
+    return res.status(200).json(res.locals.postComment)
+})
+
+//IF THE URL IS INVALID
+app.use('*', (req, res) => {
     res.status(404).send('404: Page not found')
 })
 
+//GLOBAL ERROR HANDLER
 app.use((err, req, res, next) => {
     const globalErr = {
         log: 'Middleware error',
