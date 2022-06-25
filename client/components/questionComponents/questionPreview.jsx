@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Outlet, Link } from "react-router-dom";
 
-function questionPreview(props) {
+function QuestionPreview(props) {
     /* Props
     id
     title
@@ -20,4 +20,4 @@ function questionPreview(props) {
     );
 }
 
-export default questionPreview;
+export default QuestionPreview;
