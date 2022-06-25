@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Outlet, Link } from "react-router-dom";
-import QuestionMaker from './questionComponents/questionMaker.jsx';
+import QuestionMaker from './questionComponents/QuestionMaker.jsx';
 
-function questionAsk() {
+function QuestionAsk() {
     const postQuestionHandler = function(event) {
         //This should post question information to the server
         const questionTitle = event.target[0].value;
@@ -29,4 +29,4 @@ function questionAsk() {
     );
 }
 
-export default questionAsk;
+export default QuestionAsk;

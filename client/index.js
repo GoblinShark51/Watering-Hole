@@ -1,7 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
+import QuestionList from '/client/components/QuestionList.jsx';
 
 render(
-    <p>HELLO</p>,
-    document.body
+    <QuestionList/>,
+    document.getElementById('root')
   );
