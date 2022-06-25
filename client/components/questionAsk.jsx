@@ -3,14 +3,12 @@ import { Outlet, Link } from "react-router-dom";
 import QuestionMaker from './questionComponents/questionMaker.jsx';
 
 function questionAsk() {
-    // Declare a new state variable, which we'll call "count"  const [count, setCount] = useState(0);
-    // const [count, setCount] = useState(0);
-    const questions = GetQuestionList();
-
     const postQuestionHandler = function(event) {
         //This should post question information to the server
+        const questionTitle = event.target[0].value;
+        const questionContent = event.target[1].value;
 
-        console.log(event);
+        console.log('You will try to post a question with a title of: ' + questionTitle + '\nAnd content: ' + questionContent);
 
         event.preventDefault();
     }
