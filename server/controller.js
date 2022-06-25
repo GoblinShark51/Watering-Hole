@@ -18,7 +18,7 @@ controller.createUser = (req, res, next) => {
 
 // GET login data: function to find user in database
 // send back in res.body.name
-constroller.getUser = (req, res, next) => {
+controller.getUser = (req, res, next) => {
 
 };
 // GET questions list (questions page): function to get list of questions stored in database
