@@ -1,8 +1,10 @@
 import React from "react";
+import LoginSignup from "./Login-Signup.jsx";
+
 
 function App() {
     return (
-        <h1>Hey</h1>
+        <LoginSignup/>
     )
 }
 
