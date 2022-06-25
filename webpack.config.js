@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     mode: process.env.NODE_ENV,
     entry: path.resolve(__dirname, './client/index.js'),
-    target: 'node',
+    target: 'web',
     output: {
       path: path.resolve(__dirname, 'build'),
       filename: 'bundle.js',
@@ -13,13 +13,13 @@ module.exports = {
     
     devServer: {
         static: {
-          directory: path.join(__dirname, 'client'),
+          directory: path.join(__dirname, 'client/index.js'),
         },
         compress: true,
         port: 8080,
       },
       plugins: [new HtmlWebpackPlugin({
-        filename: 'index.html',
+        inject: false,
         template: path.resolve(__dirname, './client/index.html'),
     })],
     //Loaders
