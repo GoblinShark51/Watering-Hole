@@ -3,7 +3,7 @@ const dataBase = require('./database.js');
 controller = {};
 
 // POST signup: function to create user and store info in database
-controller.createUser = (req, next) => {
+controller.createUser = (req, res, next) => {
     const {username, password} = req.body;
 
     const query = `INSERT INTO users
@@ -42,6 +42,10 @@ controller.getQuestions = (req, res, next) => {
 controller.getQuestionsWithComments = (req, res, next) => {
 
 }
+
+
+
+
 // GET user info: function to get user profile from database
 
 // POST question: function to post question to database
