@@ -12,14 +12,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
-
-// app.use(
-//     '/',
-//     createProxyMiddleware({
-//       target: 'http://www.example.org/secret',
-//       changeOrigin: true,
-//     })
-//   );
   
 
 app.listen(3000);
