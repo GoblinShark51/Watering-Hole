@@ -1,8 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
-import QuestionList from '/client/components/QuestionList.jsx';
+
+import App from './App.jsx'
 
 render(
-    <QuestionList/>,
+    <App/>,
     document.getElementById('root')
   );
