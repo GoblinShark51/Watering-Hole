@@ -3,14 +3,12 @@ const app = express();
 const path = require('path');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-app.use('/build', express.static(path.join(__dirname, '../build')));
-app.get('/build/bundle.js', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../build/bundle.js'));
-});
+app.use('/', express.static(path.join(__dirname, '../build')));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client/index.html'));
+  return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
 });
+
 
 
 // app.use(
