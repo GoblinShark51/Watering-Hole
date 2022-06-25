@@ -1,0 +1,48 @@
+{
+  "devDependencies": {
+    "html-webpack-plugin": "^5.5.0"
+  },
+  "name": "watering-hole",
+  "description": "",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/server.js",
+    "build": "NODE_ENV=production webpack -w",
+    "dev": "concurrently \"NODE_ENV=development nodemon server/server.js\" \"NODE_ENV=development webpack serve\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GoblinShark51/Watering-Hole.git"
+  },
+  "author": "Goblin Shark",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GoblinShark51/Watering-Hole/issues"
+  },
+  "homepage": "https://github.com/GoblinShark51/Watering-Hole#readme",
+  "dependencies": {
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.2.5",
+    "concurrently": "^7.2.2",
+    "css-loader": "^6.7.1",
+    "express": "^4.18.1",
+    "http-proxy-middleware": "^2.0.6",
+    "i": "^0.3.7",
+    "nodemon": "^2.0.18",
+    "npm": "^8.13.1",
+    "pg": "^8.7.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.3.0",
+    "sass": "^1.53.0",
+    "sass-loader": "^13.0.1",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.2"
+  }
+}
