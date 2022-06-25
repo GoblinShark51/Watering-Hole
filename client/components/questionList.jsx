@@ -29,7 +29,7 @@ function questionList() {
         <header id='question-list-header'>
             <h1>Questions</h1>
         </header>
-        <button id='ask-button' onClick={askButtonHandler}>Ask Question</button>
+        <button id='ask-btn' onClick={askButtonHandler}>Ask Question</button>
         <div id='question-list-container'>
             {ql}
         </div>
