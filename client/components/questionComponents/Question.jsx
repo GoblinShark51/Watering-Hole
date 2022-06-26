@@ -3,7 +3,7 @@ import { Outlet, Link, useParams } from 'react-router-dom';
 
 function Question(props) {
   // this hook retrievieves the url parameter and stores it for querying use
-  const params = useParams();
+  const params = useParams(); // this is the id of the question which we can use to query the db
   // initializing state to undefined values for now
   const [state, setState] = useState({
     questionTitle: undefined,
