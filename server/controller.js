@@ -46,11 +46,40 @@ controller.getQuestionsWithComments = (req, res, next) => {
 
 // POST question: function to post question to database
 controller.postQuestion = (req, res, next) => {
+    const {title, content, author} = req.body;
+    const timestamp = Date.now();
+    const queryString = `INSERT INTO questions
+    (title, id_author, q_content, time_stamp)
+    VALUES (${title}, ${author}, ${content}, ${timestamp});`
+
+    dataBase.query(queryString)
+        .then(data => {
+            res.locals.postQuestion = data;
+            return next();
+        }).catch(err => next({
+            log: 'Middleware error in postQuestion',
+            message: { err: 'An error occured'}
+        }));
 
 }
 // POST comment: function to post comment to database
 controller.postComment = (req, res, next) => {
+    const {author, content, question_id} = req.body;
+    const timestamp = Date.now();
+    const queryString = `INSERT INTO comments
+    (id_author, c_content, id_question, time_stamp)
+    VALUES (${author}, ${content}, ${question_id}, ${timestamp});`
 
+    dataBase.query(queryString)
+        .then(data => {
+            res.locals.postQuestion = data;
+            return next();
+        }).catch(err => next({
+            log: 'Middleware error in postQuestion',
+            message: { err: 'An error occured'}
+        }));
+
+    
 }
 
 module.exports = controller;
