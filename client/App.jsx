@@ -5,7 +5,7 @@ import QuestionList from "./components/questionList.jsx";
 
 function App() {
     return (
-        <QuestionList/>
+        <LoginSignup/>
     )
 }
 
