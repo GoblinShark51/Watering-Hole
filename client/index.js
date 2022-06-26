@@ -11,6 +11,7 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path='/questions' element={<QuestionList />} />
+      {/* this is the dynamic route segment */}
       <Route path='/:questionId' element={<Question />}/>
       <Route path='/' element={<App />}>
         {/* <Route path='invoices' element={<Invoices />} /> */}
