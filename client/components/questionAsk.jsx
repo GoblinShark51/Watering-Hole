@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import QuestionMaker from './questionComponents/QuestionMaker.jsx';
 
 function QuestionAsk() {
@@ -12,11 +12,11 @@ function QuestionAsk() {
 
         event.preventDefault();
     }
-
-    const cancelQuestionHandler = function(event) {
-        //Return to questionList.jsx route
-        console.log('Cancelling question.');
-    }
+    const navigate = useNavigate();
+    const cancelQuestionHandler = function() {
+      console.log('Navigating to questionList');
+      return navigate('/questions', {replace: true}), [navigate];
+    };
 
     return (
       <div id='page-question-ask'>
