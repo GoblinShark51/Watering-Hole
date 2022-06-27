@@ -17,7 +17,7 @@ function QuestionPreview(props) {
         {/* NOTES: changed this to a router link to be more compatible with react-router
         added a dynamic route to react router... refer to index.js  
         I never finished this component, just wanted to have something rendered to test the routes */}
-        <Link to={`questions/${props.id}`} >{props.title}</Link>
+        <Link to={`${props.id}`} >{props.title}</Link>
       </h3>
       <p>by: {props.author}</p>
       {/* just added these for visual */}
