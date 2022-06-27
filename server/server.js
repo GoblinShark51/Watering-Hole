@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 //CHECK IF USER IS IN THE DATABASE
 //* GET login data {username: x, password: none} <- CLIENT SENDS THIS TO SERVER
                  //{username: x} <- SERVER SENDS THIS BACK (FOR NOW)
-app.get('/login', controller.getUser, (req, res) => {
+app.post('/login', controller.getUser, (req, res) => {
     return res.status(200).json(res.locals.getUser);
 })
 

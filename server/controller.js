@@ -24,7 +24,7 @@ controller.createUser = (req, res, next) => {
             next();
         })      
         .catch(err => console.log(err))
-    next();
+    
 };
 
 // GET login data: function to find user in database
@@ -32,7 +32,7 @@ controller.createUser = (req, res, next) => {
 controller.getUser = (req, res, next) => {
     const {username, password} = req.body;
 
-    const query = `SELECT username, password
+    const query = `SELECT _id, username
     FROM users
     WHERE username = '${username}' AND password = '${password};'`
 
@@ -40,31 +40,31 @@ controller.getUser = (req, res, next) => {
     //`SELECT username, password FROM users WHERE username=$1 AND password=$2
 
     dataBase.query(query)
+        .then(data => data.rows)
         .then(data => {
-            res.locals.getUser = username;
+            res.locals.getUser = data[0];
             next();
         })
         .catch(err => console.log(err))
-        next();
 };
 
 // GET questions list (questions page): function to get list of questions stored in database
 controller.getQuestions = (req, res, next) => {
     // use inner join
-    const{} = re.body;
-    // [{id: id, questionTitle: title, questionAuthor: theirname, timestamp: time}]
-    const query = `SELECT questions.id, questions.title, questions.timestamp, users.username
-    FROM questions
-    INNER JOIN users
-    ON questions.id_author = users.id;`
+    // const{} = re.body;
+    // // [{id: id, questionTitle: title, questionAuthor: theirname, timestamp: time}]
+    // const query = `SELECT questions.id, questions.title, questions.timestamp, users.username
+    // FROM questions
+    // INNER JOIN users
+    // ON questions.id_author = users.id;`
 
-    dataBase.query(query)
-        .then(data => {
-            res.locals.getQuestions = [data.rows];
-            next();
-        })
-        .catch(err => console.log(err))
-        next();
+    // dataBase.query(query)
+    //     .then(data => {
+    //         res.locals.getQuestions = [data.rows];
+    //         next();
+    //     })
+    //     .catch(err => console.log(err))
+    //     next();
 };
 
 // GET question (with comment data)
@@ -80,15 +80,15 @@ controller.getQuestions = (req, res, next) => {
 }
 */
 controller.getQuestionsWithComments = (req, res, next) => {
-    const {id} = req.body;
+    // const {id} = req.body;
 
-    const query = `SELECT q.id, q.title, q.q_content, q.times_tamp, 
-    u.author AS question_author,
-    comments.id, comments.author, comments.content, comments.timestamp
-    FROM questions q
-    INNER JOIN users u ON q.id_author = u.id
-    INNER JOIN comments
-    ON `
+    // const query = `SELECT q.id, q.title, q.q_content, q.times_tamp, 
+    // u.author AS question_author,
+    // comments.id, comments.author, comments.content, comments.timestamp
+    // FROM questions q
+    // INNER JOIN users u ON q.id_author = u.id
+    // INNER JOIN comments
+    // ON `
 
 }
 
@@ -97,11 +97,45 @@ controller.getQuestionsWithComments = (req, res, next) => {
 
 // POST question: function to post question to database
 controller.postQuestion = (req, res, next) => {
+    const {title, content, author} = req.body;
+
+    //changed the schema so the current datetime is automatically added to the time_stamp column
+    const queryString = `INSERT INTO questions
+    (title, id_author, q_content)
+    VALUES ('${title}', '${author}', '${content}') RETURNING _id, title, id_author, q_content, time_stamp;`
+
+    dataBase.query(queryString)
+        .then(data => data.rows)
+        .then(data => {
+            res.locals.postQuestion = data[0];
+            return next();
+        }).catch(err => next({
+            log: 'Middleware error in postQuestion',
+            message: { err: 'An error occured'}
+        }));
 
 }
 // POST comment: function to post comment to database
 controller.postComment = (req, res, next) => {
+    const {author, content, question_id} = req.body;
 
+    //changed the schema so the current datetime is automatically added to the time_stamp column
+    const queryString = `INSERT INTO comments
+    (id_author, c_content, id_question)
+    VALUES ('${author}', '${content}', '${question_id}') RETURNING _id, id_author, c_content, id_question, time_stamp;`
+
+    dataBase.query(queryString)
+        .then(data => data.rows)
+        .then(data => {
+            console.log(data)
+            res.locals.postComment = data[0];
+            return next();
+        }).catch(err => next({
+            log: 'Middleware error in postQuestion',
+            message: { err: 'An error occured'}
+        }));
+
+    
 }
 
 module.exports = controller;
