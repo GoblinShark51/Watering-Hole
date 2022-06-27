@@ -1,19 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import QuestionPreview from './questionComponents/QuestionPreview.jsx';
 
 function QuestionList() {
     console.log('Rendering QuestionList.jsx');
-
     const navigate = useNavigate();
-    const questions = GetQuestionList();
+
+    const [questions, setQuestions] = useState([]);
+    useEffect(() => {
+        fetch('/getList')
+        .then((response) => {
+            console.log('Verified: recieved response from server.');
+            return response.json();
+        })
+        .then((data) => {
+            // do something
+            setQuestions(data);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+      }, []);
+    
 
     const ql = [];
     for(let i = 0; i < questions.length; i++) {
         const curQues = questions[i];
 
         //"2022-06-27 T 12:48:15 . 693Z"
-        const splitTime = curQues.timestamp.split('T');
+        const splitTime = curQues.time_stamp.split('T');
         const tsDateConv = splitTime[0];
         const tsTimeConv = splitTime[1].split('.')[0];
 
@@ -22,11 +37,10 @@ function QuestionList() {
         ql.push(
             <QuestionPreview
             // just added the key here to remove the error
-                key={curQues.id}
-                id={curQues.id}
-                title={curQues.questionTitle}
-                author={curQues.questionAuthor}
-                timestamp={curQues.timestamp}
+                key={curQues._id}
+                id={curQues._id}
+                title={curQues.title}
+                author={curQues.username}
                 tsDate={tsDateConv}
                 tsTime={tsTimeConv}
             />

@@ -59,7 +59,7 @@ controller.getQuestions = (req, res, next) => {
 
     dataBase.query(query)
         .then(data => {
-            // console.log(data.rows);
+            console.log(data.rows);
             res.locals.getQuestions = data.rows;
             // console.log(res.locals.getQuestions);
             next();

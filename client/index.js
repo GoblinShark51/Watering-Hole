@@ -7,6 +7,9 @@ import QuestionList from './components/questionList.jsx';
 import Question from './components/questionComponents/Question.jsx'
 import QuestionAsk from './components/questionAsk.jsx';
 
+//style 
+import styles from './scss/stylish.css';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
