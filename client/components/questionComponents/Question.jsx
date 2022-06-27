@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useParams, useNavigate } from 'react-router-dom';
+import Comment from '../Comment.jsx';
 
 function Question(props) {
   // this hook retrievieves the url parameter and stores it for querying use
@@ -10,13 +11,13 @@ function Question(props) {
     questionAuthor: 'Default Author',
     questionContent: 'how do i center a div',
     timeStamp: 'right now',
-    comments: [],
+    comments: [{ username: 'toast', content: 'heres a solution'}],
   });
-    
+
   const navigate = useNavigate();
-  const backToQuestionList = function() {
+  const backToQuestionList = function () {
     console.log('Navigating to questionList');
-    return navigate('/questions', {replace: true}), [navigate];
+    return navigate('/questions', { replace: true }), [navigate];
   };
 
   // this is the functional component version of componentDidMount. This is where we can make our fetch request.
@@ -36,15 +37,37 @@ function Question(props) {
   //     });
   // }, []);
 
+  console.log(state);
+
+  const commentss = [];
+  for (const comment of state.comments) {
+    commentss.push(
+      <Comment
+        username={comment.username}
+        content={comment.content}
+        timeStamp={comment.timeStamp}
+      />
+    );
+  }
+
   return (
-    <div className='question-container'>
-      <button id='back-to-questionlist-btn' onClick={backToQuestionList}>Back</button>
-      <h3 className='question-title'>{state.questionTitle}</h3>
-      <p>Author: {state.questionAuthor} </p>
-      <p>{state.timeStamp}</p>
-      <br />
-      <p>{state.questionContent}</p>
-    </div>
+    <React.Fragment>
+      <div className='question-container'>
+        <button id='back-to-questionlist-btn' onClick={backToQuestionList}>
+          Back
+        </button>
+        <h3 className='question-title'>{state.questionTitle}</h3>
+        <p>Author: {state.questionAuthor} </p>
+        <p>{state.timeStamp}</p>
+        <br />
+        <p>{state.questionContent}</p>
+      </div>
+      <div className='comments-container'>
+        <h2>Comments</h2>
+        {commentss}
+      </div>
+    </React.Fragment>
+
     // probably can render a list of comment components here if there are any comments
   );
 }
