@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Asul&family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Source+Sans+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rye&display=swap');
+
+.question-page-body {
+    background-color: #ffe3a0;
+    width: 80%;
+    height: auto;
+    padding: 50px;
+    box-shadow: 5px 5px 5px lightblue;
+    margin: auto;
+
+    /* font-family: 'Rye', cursive; */
+    /* font-family: 'Playfair Display', serif; */
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 0px;
+}
+
+.question-container {
+    background-color: #fff5be;
+    padding-bottom: 20px;
+    
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.question-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    margin: 0px;
+}
+
+.question-subinfo {
+    font-size: 10px;
+}
+
+.question-content {
+    font-size: 16px;
+    background-color: white;
+    border: black;
+
+    height: auto;
+    min-height: 100px;
+    padding: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.commentMaker {
+    background-color: wheat;
+    width: auto;
+    
+    display: flex;
+    justify-content: center;
+}
+
+.comment-maker-text {
+    resize: none;
+    width: 600px;
+    height: 150px;
+}
+
+.comment-submit-btn {
+    margin: 20px;
+}

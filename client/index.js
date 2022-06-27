@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import App from './App.jsx';
 import QuestionList from './components/questionList.jsx';
@@ -9,11 +9,14 @@ import QuestionAsk from './components/questionAsk.jsx';
 
 //style 
 import styles from './scss/stylish.css';
+import questionStyles from './scss/question.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
+    <Link to='test/id1'>Test</Link>
     <Routes>
+      <Route path='/test/:questionId' element={<Question /> }/>
       <Route path='/questions' element={<QuestionList />} />
       <Route path='/questions/create' element={<QuestionAsk />}/>
       {/* this is the dynamic route segment */}
