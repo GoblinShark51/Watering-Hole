@@ -3,17 +3,22 @@ const dataBase = require('./database.js');
 controller = {};
 
 // POST signup: function to create user and store info in database
-controller.createUser = (req, next) => {
+controller.createUser = (req, res, next) => {
+
     const {username, password} = req.body;
 
     const query = `INSERT INTO users
     (username, password)
-    VALUES ('${username}', '${password}')`
+    VALUES ('${username}', '${password}') RETURNING _id, username;`
 
     dataBase.query(query)
-        .then(data => next())
+        .then(data => data.rows)
+        .then(data => {
+            res.locals.createUser = data[0];
+            next();
+        })
         .catch(err => console.log(err))
-    next();
+    
 };
 
 // GET login data: function to find user in database
@@ -21,17 +26,17 @@ controller.createUser = (req, next) => {
 controller.getUser = (req, res, next) => {
     const {username, password} = req.body;
 
-    const query = `SELECT username, password
+    const query = `SELECT _id, username
     FROM users
-    WHERE username = '${username}' AND password = '${password}'`
+    WHERE username = '${username}' AND password = '${password}';`
 
     dataBase.query(query)
+        .then(data => data.rows)
         .then(data => {
-            res.locals.getUser = username;
+            res.locals.getUser = data[0];
             next();
         })
         .catch(err => console.log(err))
-        next();
 };
 
 // GET questions list (questions page): function to get list of questions stored in database
@@ -46,11 +51,45 @@ controller.getQuestionsWithComments = (req, res, next) => {
 
 // POST question: function to post question to database
 controller.postQuestion = (req, res, next) => {
+    const {title, content, author} = req.body;
+
+    //changed the schema so the current datetime is automatically added to the time_stamp column
+    const queryString = `INSERT INTO questions
+    (title, id_author, q_content)
+    VALUES ('${title}', '${author}', '${content}') RETURNING _id, title, id_author, q_content, time_stamp;`
+
+    dataBase.query(queryString)
+        .then(data => data.rows)
+        .then(data => {
+            res.locals.postQuestion = data[0];
+            return next();
+        }).catch(err => next({
+            log: 'Middleware error in postQuestion',
+            message: { err: 'An error occured'}
+        }));
 
 }
 // POST comment: function to post comment to database
 controller.postComment = (req, res, next) => {
+    const {author, content, question_id} = req.body;
 
+    //changed the schema so the current datetime is automatically added to the time_stamp column
+    const queryString = `INSERT INTO comments
+    (id_author, c_content, id_question)
+    VALUES ('${author}', '${content}', '${question_id}') RETURNING _id, id_author, c_content, id_question, time_stamp;`
+
+    dataBase.query(queryString)
+        .then(data => data.rows)
+        .then(data => {
+            console.log(data)
+            res.locals.postComment = data[0];
+            return next();
+        }).catch(err => next({
+            log: 'Middleware error in postQuestion',
+            message: { err: 'An error occured'}
+        }));
+
+    
 }
 
 module.exports = controller;
