@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import QuestionPreview from './questionComponents/QuestionPreview.jsx';
 
 function QuestionList() {
     console.log('Rendering QuestionList.jsx');
 
+    const navigate = useNavigate();
     const questions = GetQuestionList();
 
     const ql = [];
@@ -21,11 +22,11 @@ function QuestionList() {
             />
         );
     }
-
-    const askButtonHandler = function(event) {
-        //This should route to the ask question page
-        console.log('Moving to questionAsk page');
-    }
+    
+    const askButtonHandler = function() {
+        console.log('Navigating to questionAsk');
+        return navigate('/questions/create', {replace: true}), [navigate];
+    };
 
     return (
       <div id='page-question-list'>
@@ -45,9 +46,9 @@ const GetQuestionList = function() {
     //Returning model for now
     return [
         {id: 'id1', questionTitle: 'Question 1', questionAuthor: 'Ian', timestamp: new Date(Date.now()).toString()},
-        {id: 'id2', questionTitle: 'Question 2', questionAuthor: 'Jared', timestamp: Date.now},
-        {id: 'id3', questionTitle: 'Question 3', questionAuthor: 'Tran', timestamp: Date.now},
-        {id: 'id4', questionTitle: 'Question 4', questionAuthor: 'Keyla', timestamp: Date.now}
+        {id: 'id2', questionTitle: 'Question 2', questionAuthor: 'Jared', timestamp: new Date(Date.now()).toString()},
+        {id: 'id3', questionTitle: 'Question 3', questionAuthor: 'Tran', timestamp: new Date(Date.now()).toString()},
+        {id: 'id4', questionTitle: 'Question 4', questionAuthor: 'Keyla', timestamp: new Date(Date.now()).toString()}
     ] 
 }
 
