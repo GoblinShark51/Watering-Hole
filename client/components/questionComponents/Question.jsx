@@ -7,7 +7,7 @@ function Question(props) {
   // initializing state to undefined values for now
   const [state, setState] = useState({
     questionTitle: undefined,
-    questionAuther: undefined,
+    questionAuthor: undefined,
     questionContent: undefined,
     timeStamp: undefined,
     comments: undefined,
@@ -22,7 +22,7 @@ function Question(props) {
         setState({
             // just as demo
             questionTitle: data.title,
-            questionAuther: data.auther,
+            questionAuthor: data.author,
             questionContent: data.content,
             timeStamp: data.timeStamp,
             comments: data.comments, // most likely an array here
@@ -33,7 +33,7 @@ function Question(props) {
   return (
     <div className='question-container'>
       <h3 className='question-title'>{questionTitle}</h3>
-      <p>Auther: {questionAuther} </p>
+      <p>Author: {questionAuthor} </p>
       <p>{timeStamp}</p>
       <br />
       <p>{questionContent}</p>
