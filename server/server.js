@@ -15,6 +15,10 @@ app.get('/', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
 });
 
+app.get('/questions', (req, res) => {
+    return res.status(200).sendFile(path.resolve(__dirname, '../client/index.html'));
+});
+
 //////////////////////
 // route 
 //CHECK IF USER IS IN THE DATABASE
@@ -49,6 +53,8 @@ app.get('/getList', controller.getQuestions, (req, res) => {
   comments: [{id: id, author: theirname, content: theirtext, timestamp: time}]
 }
 */
+
+
 app.get('/question/:id', controller.getQuestionsWithComments, (req, res) => {
     return res.status(200).json(res.locals.getQuestionsWithComments);
 })
