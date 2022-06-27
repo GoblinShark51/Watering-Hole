@@ -6,7 +6,7 @@ const controller = require('./controller');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(express.cookieParser());
 
 app.use('/', express.static(path.join(__dirname, '../build')));
 
@@ -20,12 +20,14 @@ app.get('/', (req, res) => {
 //* GET login data {username: x, password: none} <- CLIENT SENDS THIS TO SERVER
                  //{username: x} <- SERVER SENDS THIS BACK (FOR NOW)
 app.post('/login', controller.getUser, (req, res) => {
+    res.cookie('userid', 'change_this_to_res.locals.userid', { maxAge: 900000, httpOnly: true });
     return res.status(200).json(res.locals.getUser);
 })
 
 //CREATE USERNAME
 //* POST signup {username: x, password: none}
 app.post('/signup', controller.createUser, (req, res) => {
+    res.cookie('userid', 'change_this_to_res.locals.userid', { maxAge: 900000, httpOnly: true });
     return res.status(200).json(res.locals.createUser);
 })
 
