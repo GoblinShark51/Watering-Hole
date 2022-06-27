@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const controller = require('./controller');
+const cookieParser = require('cookie-parser')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
