@@ -4,26 +4,27 @@ controller = {};
 
 // POST signup: function to create user and store info in database
 controller.createUser = (req, res, next) => {
+    console.log(req.body)
     const {username, password} = req.body;
 
-    console.log(req.body);
 
-    const query = `INSERT INTO users
-    (username, password)
-    VALUES ('${username}', '${password}') RETURNING _id, username;`
-    //VALUES ('${username}', '${password}')`
 
-    dataBase.query(query)
+    // const query = `INSERT INTO users
+    // (username, password)
+    // VALUES ('${username}', '${password}') RETURNING _id, username;`
+    // //VALUES ('${username}', '${password}')`
+
+    // dataBase.query(query)
         
-        .then(data => {
-            console.log(data)
-            data.rows;
-        })
-        .then(data => {
-            res.locals.createUser = data[0];
-            next();
-        })      
-        .catch(err => console.log(err))
+    //     .then(data => {
+    //         console.log(data)
+    //         data.rows;
+    //     })
+    //     .then(data => {
+    //         res.locals.createUser = data[0];
+    //         next();
+    //     })      
+    //     .catch(err => console.log(err))
     
 };
 

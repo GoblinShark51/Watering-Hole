@@ -4,6 +4,7 @@ const path = require('path');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const controller = require('./controller');
 
+
 app.use('/', express.static(path.join(__dirname, '../build')));
 
 app.get('/', (req, res) => {
