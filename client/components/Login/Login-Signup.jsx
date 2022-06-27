@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function LoginSignup() {
+  //Navigate
+  const navigate = useNavigate();
+
   // pretty sure this can all be in one state but can just change it later
   const [hasAccount, sethasAccount] = useState(false);
   const [username, setUsername] = useState(undefined);
@@ -14,6 +17,8 @@ function LoginSignup() {
 const handleClick = (event) => {
   const username = event.target.username.value
   const password = event.target.password.value
+
+  console.log('Verified: got username and password');
   // realized this has to be a POST request no matter what, you can send info in the body of the request BUT
   // the internet says that it's bad practice and you should send a post request if you want to put info in the req.body
   // send a different request depending on state
@@ -27,15 +32,23 @@ const handleClick = (event) => {
       password
     })
   }).then((response) => {
-    response.json();
+    console.log('Verified: recieved response from server.');
+    return response.json();
   })
   .then((data) => {
     // do something
     setUsername({
-      username: data.username
+      username: data.username,
+      id: data._id
     })
-    
-  }) 
+
+    console.log('Logged in with: ', data);
+
+    return navigate('/questions', {replace: true}), [navigate];
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 }
 
   return (
@@ -52,11 +65,6 @@ const handleClick = (event) => {
           <br />
           <input type='text' name='password' />
           <br />
-          <button type='submit'>
-            {' '}
-            {/* conditionaly rendering a diferrent button depending on the state */}
-            <Link to='/questions'>{hasAccount ? 'Log in' : 'Sign up'}</Link>
-          </button>
           {/* this is just here because I can't figure out how to wrap a submite button with the link tag */}
           <input type="submit" name="" id="" />
         </form>
