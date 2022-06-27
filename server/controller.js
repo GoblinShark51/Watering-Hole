@@ -65,7 +65,6 @@ controller.getQuestions = (req, res, next) => {
             next();
         })
         .catch(err => console.log(err))
-        next();
 };
 
 
@@ -75,31 +74,30 @@ controller.getQuestions = (req, res, next) => {
 {
   id: id
   questionTitle: title,
-  questionAuthor: theirname,
+  -> questionAuthor: theirname,
   questionContent: content,
   timestamp: time,
   comments: [{id: id, author: theirname, content: theirtext, timestamp: time}]
 }
 */
 controller.getQuestionsWithComments = (req, res, next) => {
-    // const {id} = req.body;
-    console.log(req.body);
-    // const query = `SELECT q.id, q.title, q.q_content, q.times_tamp, 
-    // u.author AS question_author,
-    // comments.id, comments.author, comments.content, comments.timestamp
-    // FROM questions q
-    // INNER JOIN users u ON q.id_author = u.id
-    // INNER JOIN comments
-    // ON `
+    // const {question_id} = req.body;
+    // console.log(req.body);
+    // q._id, q.title, q.id_author 
+    const query = `SELECT q._id, q.id_author AS question_author, q.q_content, q.time_stamp, c.*
+    FROM comments c 
+    INNER JOIN users u ON c.id_author = u._id 
+    INNER JOIN questions q ON c.id_question = c._id;`
     
-    // dataBase.query(query)
-    // .then(data => {
-    //     // console.log(data.rows);
-    //     res.locals.getQuestions = data.rows;
-    //     // console.log(res.locals.getQuestions);
-    //     next();
-    // })
-    // .catch(err => console.log(err))
+    dataBase.query(query)
+    .then(data => {
+        // console.log(data.rows);
+        res.locals.getQuestions = data.rows;
+
+        console.log(res.locals.getQuestions);
+        next();
+    })
+    .catch(err => console.log(err))
     next();
 };
 
