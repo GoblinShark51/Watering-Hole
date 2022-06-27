@@ -15,7 +15,6 @@ function QuestionList() {
         })
         .then((data) => {
             // do something
-            console.log('Recieved questions: ', data);
             setQuestions(data);
         })
         .catch((err) => {
@@ -75,35 +74,6 @@ const GetQuestionList = function() {
         {id: 'id3', questionTitle: 'Question 3', questionAuthor: 'Tran', timestamp: '2022-06-26T12:48:15.693Z'},
         {id: 'id4', questionTitle: 'Question 4', questionAuthor: 'Keyla', timestamp: '2022-06-25T12:48:15.693Z'}
     ] 
-
-    /*
-    [
-        {
-            "_id": 1,
-            "title": "title",
-            "time_stamp": "2022-06-27T12:25:11.737Z",
-            "username": "Tran"
-        },
-        {
-            "_id": 2,
-            "title": "webpack does not work",
-            "time_stamp": "2022-06-27T12:25:57.218Z",
-            "username": "Tran"
-        },
-        {
-            "_id": 3,
-            "title": "testing with postman",
-            "time_stamp": "2022-06-27T12:27:25.486Z",
-            "username": "Tran"
-        },
-        {
-            "_id": 4,
-            "title": "question",
-            "time_stamp": "2022-06-28T02:03:30.876Z",
-            "username": "Tran"
-        }
-    ]
-    */
 }
 
 
