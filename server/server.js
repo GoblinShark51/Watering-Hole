@@ -2,7 +2,11 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const { createProxyMiddleware } = require('http-proxy-middleware');
-const {controller} = require('./controller');
+const controller = require('./controller');
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 app.use('/', express.static(path.join(__dirname, '../build')));
 
@@ -15,7 +19,7 @@ app.get('/', (req, res) => {
 //CHECK IF USER IS IN THE DATABASE
 //* GET login data {username: x, password: none} <- CLIENT SENDS THIS TO SERVER
                  //{username: x} <- SERVER SENDS THIS BACK (FOR NOW)
-app.get('/login', controller.getUser, (req, res) => {
+app.post('/login', controller.getUser, (req, res) => {
     return res.status(200).json(res.locals.getUser);
 })
 
