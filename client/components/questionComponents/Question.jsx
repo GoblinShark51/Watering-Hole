@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet, Link, useParams } from 'react-router-dom';
+import { Outlet, Link, useParams, useNavigate } from 'react-router-dom';
 
 function Question(props) {
   // this hook retrievieves the url parameter and stores it for querying use
@@ -13,8 +13,8 @@ function Question(props) {
     comments: [],
   });
     
-
-const backToQuestionList = function() {
+  const navigate = useNavigate();
+  const backToQuestionList = function() {
     console.log('Navigating to questionList');
     return navigate('/questions', {replace: true}), [navigate];
   };
