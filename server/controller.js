@@ -81,24 +81,32 @@ controller.getQuestions = (req, res, next) => {
 }
 */
 controller.getQuestionsWithComments = (req, res, next) => {
+/*
+const peopleQuery = 'SELECT p.*, s.name AS species, h.name AS homeworld' + 
+ ' FROM people p LEFT OUTER JOIN  species s' + ' ON p.species_id =s._id' 
+ + ' LEFT OUTER JOIN planets h' + ' ON p.homeworld_id = h._id;';
+*/
+
     // const {question_id} = req.body;
     // console.log(req.body);
-    // q._id, q.title, q.id_author 
-    const query = `SELECT q._id, q.id_author AS question_author, q.q_content, q.time_stamp, c.*
-    FROM comments c 
-    INNER JOIN users u ON c.id_author = u._id 
-    INNER JOIN questions q ON c.id_question = c._id;`
+    // q._id, u.username AS questionAuthor, q.q_content, q.time_stamp, c.  WHERE u.username = q.id_author
+    //RETURN INFO ABOUT THE QUESTION WITHOUT THE COMMENT INFO YET
+    //q._id, title, author, content, timstamp
+    // const query = `SELECT  q._id, u.username AS  questionAuthor, q.q_content, q.time_stamp
+    // FROM questions q LEFT OUTER JOIN 
+    // INNER JOIN users u ON c.id_author = u._id 
+    // INNER JOIN questions q ON c.id_question = c._id`
     
-    dataBase.query(query)
-    .then(data => {
-        // console.log(data.rows);
-        res.locals.getQuestions = data.rows;
+    // dataBase.query(query)
+    // .then(data => {
+    //     // console.log(data.rows);
+    //     res.locals.getQuestions = data.rows;
 
-        console.log(res.locals.getQuestions);
-        next();
-    })
-    .catch(err => console.log(err))
-    next();
+    //     console.log(res.locals.getQuestions);
+    //     next();
+    // })
+    // .catch(err => console.log(err))
+    // next();
 };
 
 // GET user info: function to get user profile from database
