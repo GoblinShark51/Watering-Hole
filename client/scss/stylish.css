@@ -1,5 +1,23 @@
 body {
   background-color: #fdfad4;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 /* Login Page */
+.LoginSignup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.LoginSignup h1 {
+  font-size: 100px;
+}
+
+.LoginSignup .signupBox {
+  background-color: white;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
