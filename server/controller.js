@@ -74,12 +74,13 @@ controller.getQuestions = (req, res, next) => {
 {
   id: id
   questionTitle: title,
-  questionAuthor: theirname,
+  -> questionAuthor: theirname,
   questionContent: content,
   timestamp: time,
   comments: [{id: id, author: theirname, content: theirtext, timestamp: time}]
 }
 */
+<<<<<<< HEAD
 controller.getQuestionsWithComments1 = (req, res, next) => {
     /*
     const peopleQuery = 'SELECT p.*, s.name AS species, h.name AS homeworld' + 
@@ -123,6 +124,28 @@ controller.getQuestionsWithComments2 = (req, res, next) => {
     .catch(err => next({err}))
 
 }
+=======
+controller.getQuestionsWithComments = (req, res, next) => {
+    // const {question_id} = req.body;
+    // console.log(req.body);
+    // q._id, q.title, q.id_author 
+    const query = `SELECT q._id, q.id_author AS question_author, q.q_content, q.time_stamp, c.*
+    FROM comments c 
+    INNER JOIN users u ON c.id_author = u._id 
+    INNER JOIN questions q ON c.id_question = c._id;`
+    
+    dataBase.query(query)
+    .then(data => {
+        // console.log(data.rows);
+        res.locals.getQuestions = data.rows;
+
+        console.log(res.locals.getQuestions);
+        next();
+    })
+    .catch(err => console.log(err))
+    next();
+};
+>>>>>>> dev
 
 // GET user info: function to get user profile from database
 
