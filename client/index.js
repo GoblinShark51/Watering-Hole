@@ -14,7 +14,7 @@ root.render(
       <Route path='/questions' element={<QuestionList />} />
       <Route path='/questions/create' element={<QuestionAsk />}/>
       {/* this is the dynamic route segment */}
-      <Route path='/:questionId' element={<Question />}/>
+      <Route path='/questions/:questionId' element={<Question />}/>
       <Route path='/' element={<App /> }>
         {/* <Route path='invoices' element={<Invoices />} /> */}
       </Route>
