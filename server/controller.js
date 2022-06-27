@@ -83,7 +83,7 @@ controller.getQuestions = (req, res, next) => {
 */
 controller.getQuestionsWithComments = (req, res, next) => {
     // const {id} = req.body;
-
+    console.log(req.body);
     // const query = `SELECT q.id, q.title, q.q_content, q.times_tamp, 
     // u.author AS question_author,
     // comments.id, comments.author, comments.content, comments.timestamp
@@ -91,8 +91,17 @@ controller.getQuestionsWithComments = (req, res, next) => {
     // INNER JOIN users u ON q.id_author = u.id
     // INNER JOIN comments
     // ON `
-
-}
+    
+    // dataBase.query(query)
+    // .then(data => {
+    //     // console.log(data.rows);
+    //     res.locals.getQuestions = data.rows;
+    //     // console.log(res.locals.getQuestions);
+    //     next();
+    // })
+    // .catch(err => console.log(err))
+    next();
+};
 
 // GET user info: function to get user profile from database
 
