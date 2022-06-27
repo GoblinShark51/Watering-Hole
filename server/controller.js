@@ -99,11 +99,12 @@ controller.getQuestionsWithComments = (req, res, next) => {
 // POST question: function to post question to database
 controller.postQuestion = (req, res, next) => {
     const {title, content, author} = req.body;
+    const userId = req.cookies.userid; //Author will just be the username from now on JUST IN CASE WE NEED IT
 
     //changed the schema so the current datetime is automatically added to the time_stamp column
     const queryString = `INSERT INTO questions
     (title, id_author, q_content)
-    VALUES ('${title}', '${author}', '${content}') RETURNING _id, title, id_author, q_content, time_stamp;`
+    VALUES ('${title}', '${userId}', '${content}') RETURNING _id, title, id_author, q_content, time_stamp;`
 
     dataBase.query(queryString)
         .then(data => data.rows)
@@ -119,11 +120,12 @@ controller.postQuestion = (req, res, next) => {
 // POST comment: function to post comment to database
 controller.postComment = (req, res, next) => {
     const {author, content, question_id} = req.body;
+    const userId = req.cookies.userid; //Author will just be the username from now on JUST IN CASE WE NEED IT
 
     //changed the schema so the current datetime is automatically added to the time_stamp column
     const queryString = `INSERT INTO comments
     (id_author, c_content, id_question)
-    VALUES ('${author}', '${content}', '${question_id}') RETURNING _id, id_author, c_content, id_question, time_stamp;`
+    VALUES ('${userId}', '${content}', '${question_id}') RETURNING _id, id_author, c_content, id_question, time_stamp;`
 
     dataBase.query(queryString)
         .then(data => data.rows)
