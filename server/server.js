@@ -49,7 +49,7 @@ app.get('/getList', controller.getQuestions, (req, res) => {
   comments: [{id: id, author: theirname, content: theirtext, timestamp: time}]
 }
 */
-app.get('/question/:id', controller.getQuestionsWithComments, (req, res) => {
+app.get('/question/:id', controller.getQuestionsWithComments1, controller.getQuestionsWithComments2, (req, res) => {
     return res.status(200).json(res.locals.getQuestionsWithComments);
 })
 //GET USER INFO(ACCOUNT INFO STRETCH)
