@@ -11,13 +11,16 @@ controller.createUser = (req, res, next) => {
     VALUES ('${username}', '${password}')`
 
     dataBase.query(query)
-        .then(data => next())
+        .then(data => {
+            res.locals.createUser = data.rows.username;
+            next()
+        })
         .catch(err => console.log(err))
     next();
 };
 
 // GET login data: function to find user in database
-// send back in res.body.name
+// send back in res.body.getUser
 controller.getUser = (req, res, next) => {
     const {username, password} = req.body;
 
@@ -36,10 +39,25 @@ controller.getUser = (req, res, next) => {
 
 // GET questions list (questions page): function to get list of questions stored in database
 controller.getQuestions = (req, res, next) => {
+    // use inner join
+    // [{id: id, questionTitle: title, questionAuthor: theirname, timestamp: time}]
+    const query = `SELECT questions.id, questions.questionTitle, questions.timestamp, users.username
+    FROM questions
+    INNER JOIN users
+    ON questions.id = users.d_author`
 
-}
+    dataBase.query(query)
+        .then(data => {
+            res.locals.getQuestions = data;
+            next();
+        })
+        .catch(err => console.log(err))
+        next();
+};
+
 // GET question (with comment data)
 controller.getQuestionsWithComments = (req, res, next) => {
+    const query = ``
 
 }
 
