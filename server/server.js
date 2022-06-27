@@ -3,10 +3,11 @@ const app = express();
 const path = require('path');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const controller = require('./controller');
+const cookieParser = require('cookie-parser')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cookieParser());
 
 app.use('/', express.static(path.join(__dirname, '../build')));
 
@@ -20,12 +21,14 @@ app.get('/', (req, res) => {
 //* GET login data {username: x, password: none} <- CLIENT SENDS THIS TO SERVER
                  //{username: x} <- SERVER SENDS THIS BACK (FOR NOW)
 app.post('/login', controller.getUser, (req, res) => {
+    res.cookie('userid', res.locals.getUser._id, { maxAge: 900000, httpOnly: true });
     return res.status(200).json(res.locals.getUser);
 })
 
 //CREATE USERNAME
 //* POST signup {username: x, password: none}
 app.post('/signup', controller.createUser, (req, res) => {
+    res.cookie('userid', res.locals.createUser._id, { maxAge: 900000, httpOnly: true });
     return res.status(200).json(res.locals.createUser);
 })
 
