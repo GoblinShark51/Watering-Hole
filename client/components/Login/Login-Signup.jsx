@@ -54,7 +54,8 @@ const handleClick = (event) => {
   return (
     // using fragment as a wrapper instead of a div as to not have ajacent elements
     <React.Fragment>
-      Welcome to the WateringHole
+     <h1>Welcome to the WateringHole</h1>
+      {hasAccount ? <h2>Log in here</h2> : <h2>Sign up here</h2>}
       <div>
         <form onSubmit={(event) => {
           event.preventDefault();
@@ -66,7 +67,7 @@ const handleClick = (event) => {
           <input type='text' name='password' />
           <br />
           {/* this is just here because I can't figure out how to wrap a submite button with the link tag */}
-          <input type="submit" name="" id="" />
+          <input type="submit"  name="" id="" />
         </form>
         {username}
       </div>
