@@ -63,7 +63,6 @@ controller.postQuestion = (req, res, next) => {
         .then(data => data.rows)
         .then(data => {
             res.locals.postQuestion = data[0];
-            res.locals.userId = userId;
             return next();
         }).catch(err => next({
             log: 'Middleware error in postQuestion',
@@ -86,7 +85,6 @@ controller.postComment = (req, res, next) => {
         .then(data => {
             console.log(data)
             res.locals.postComment = data[0];
-            res.locals.userId = userId;
             return next();
         }).catch(err => next({
             log: 'Middleware error in postQuestion',
