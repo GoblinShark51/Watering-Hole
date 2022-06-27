@@ -54,8 +54,9 @@ const handleClick = (event) => {
   return (
     // using fragment as a wrapper instead of a div as to not have ajacent elements
     <React.Fragment>
-      Welcome to the WateringHole
-      <div>
+    <div className='LoginSignup'>
+      <h1>Welcome to the WateringHole</h1>
+      <div className='signupBox'>
         <form onSubmit={(event) => {
           event.preventDefault();
           handleClick(event)
@@ -69,7 +70,7 @@ const handleClick = (event) => {
           <input type="submit" name="" id="" />
         </form>
         {username}
-      </div>
+      
       {/* conditionaly rendering a diferrent element and content depending on the state */}
       {hasAccount ? (
         <div>
@@ -88,6 +89,8 @@ const handleClick = (event) => {
           </button>
         </div>
       )}
+      </div>
+    </div>
     </React.Fragment>
   );
 }
