@@ -61,13 +61,13 @@ const handleClick = (event) => {
           event.preventDefault();
           handleClick(event)
         }}>
-          <input type='text' name='username' />
+          <input className="input_field" placeholder="username" type='text' name='username' />
           <br />
           <br />
-          <input type='text' name='password' />
+          <input className="input_field" placeholder="password" type='text' name='password' />
           <br />
           {/* this is just here because I can't figure out how to wrap a submite button with the link tag */}
-          <input type="submit" name="" id="" />
+          <input className="submit_button" type="submit" name="" id="" />
         </form>
         {username}
       
