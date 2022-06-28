@@ -15,7 +15,6 @@ import jaredSteeze from './scss/jaredStyles.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <Link to='test/id1'>Test</Link>
     <Routes>
       <Route path='/test/:questionId' element={<Question /> }/>
       <Route path='/questions' element={<QuestionList />} />
