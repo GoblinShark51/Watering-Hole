@@ -28,7 +28,7 @@ function QuestionAsk() {
         })
         .then((data) => {
           // do something
-          console.log('Posted question: ', sendData);
+          console.log(data);
           return navigate('/questions', {replace: true}), [navigate];
         })
         .catch((err) => {
