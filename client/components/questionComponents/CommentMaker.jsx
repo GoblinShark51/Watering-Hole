@@ -33,8 +33,24 @@ function CommentMaker(props) {
         .then((data) => {
           // do something
           console.log('Posted comment: ', sendData);
-          oldComments.push(sendData);
-          updateComments(oldComments);
+
+          //{ author: "we dont use the author part of the body anymore", content: "I am placing a comment without thinking about the consequences.", question_id: "1" }
+          //SHOULD BE LIKE: 
+          /*
+          {
+            "_id": 4,
+            "id_author": 1,
+            "id_question": 1,
+            "c_content": "testing, commit content",
+            "time_stamp": "2022-06-28T02:13:25.219Z",
+            "comment_author": "Tran"
+          },
+          */
+          props.oldComments.push({
+            c_content: data.content,
+            comment_author: data.author
+          });
+          props.updateComments(props.oldComments);
         })
         .catch((err) => {
           console.log(err);
