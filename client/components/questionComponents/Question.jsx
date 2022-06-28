@@ -46,13 +46,29 @@ function Question(props) {
       });
   }, []);
 
+  comments.sort((a, b) => (a.time_stamp > b.time_stamp) ? 1 : -1)
   const commentElements = [];
-  for (const c of comments) {
+  for (let i = 0; i < comments.length; i++) {
+    const c = comments[i];
+
+    let splitTime = 'split time';
+    let tsDateConv = 'some date';
+    let tsTimeConv = 'something';
+
+    if(c.time_stamp) {
+      splitTime = c.time_stamp.split('T');
+      tsDateConv = splitTime[0];
+      tsTimeConv = splitTime[1].split('.')[0];
+    }
+    
+
     commentElements.push(
       <Comment
+        key={i}
         username={c.comment_author}
         content={c.c_content}
-        timeStamp={c.time_stamp}
+        tsDate={tsDateConv}
+        tsTime={tsTimeConv}
       />
     );
   }
@@ -79,7 +95,7 @@ function Question(props) {
         <h2>Comment Maker</h2>
         <CommentMaker
           questionId={params}
-          oldComments={comments}
+          oldComments={[...comments]}
           updateComments={setComments}
         />
       </div>
