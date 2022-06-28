@@ -59,7 +59,7 @@ controller.getQuestions = (req, res, next) => {
 
     dataBase.query(query)
         .then(data => {
-            console.log(data.rows);
+            // console.log(data.rows);
             res.locals.getQuestions = data.rows;
             // console.log(res.locals.getQuestions);
             next();
@@ -123,12 +123,15 @@ controller.getQuestionsWithComments2 = (req, res, next) => {
     .catch(err => next({err}))
 }
 
+
 // GET user info: function to get user profile from database
 
 // POST question: function to post question to database
 controller.postQuestion = (req, res, next) => {
+    
     const {title, content, author} = req.body;
     const userId = req.cookies.userid; //Author will just be the username from now on JUST IN CASE WE NEED IT
+    console.log(userId)
 
     //changed the schema so the current datetime is automatically added to the time_stamp column
     const queryString = `INSERT INTO questions
@@ -139,6 +142,7 @@ controller.postQuestion = (req, res, next) => {
         .then(data => data.rows)
         .then(data => {
             res.locals.postQuestion = data[0];
+            console.log(data[0])
             return next();
         }).catch(err => next({
             log: 'Middleware error in postQuestion',
