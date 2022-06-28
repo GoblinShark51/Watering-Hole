@@ -59,7 +59,7 @@ controller.getQuestions = (req, res, next) => {
 
     dataBase.query(query)
         .then(data => {
-            console.log(data.rows);
+            // console.log(data.rows);
             res.locals.getQuestions = data.rows;
             // console.log(res.locals.getQuestions);
             next();
@@ -74,31 +74,64 @@ controller.getQuestions = (req, res, next) => {
 {
   id: id
   questionTitle: title,
-  questionAuthor: theirname,
+  -> questionAuthor: theirname,
   questionContent: content,
   timestamp: time,
   comments: [{id: id, author: theirname, content: theirtext, timestamp: time}]
 }
 */
-controller.getQuestionsWithComments = (req, res, next) => {
-    // const {id} = req.body;
-
-    // const query = `SELECT q.id, q.title, q.q_content, q.times_tamp, 
-    // u.author AS question_author,
-    // comments.id, comments.author, comments.content, comments.timestamp
-    // FROM questions q
-    // INNER JOIN users u ON q.id_author = u.id
-    // INNER JOIN comments
-    // ON `
+controller.getQuestionsWithComments1 = (req, res, next) => {
+    /*
+    const peopleQuery = 'SELECT p.*, s.name AS species, h.name AS homeworld' + 
+ ' FROM people p LEFT OUTER JOIN  species s' + ' ON p.species_id =s._id' 
+ + ' LEFT OUTER JOIN planets h' + ' ON p.homeworld_id = h._id;'
+*/
+    const id = req.params.id;
+    console.log(id);
+    const query = `SELECT q._id, q.id_author, u.username AS question_author, q.q_content, q.time_stamp 
+    FROM questions q LEFT OUTER JOIN users u ON q.id_author=u._id WHERE q._id='${id}';`
+    
+    dataBase.query(query)
+    .then(data => data.rows[0])
+    .then(data => {
+        res.locals.getQuestionsWithComments = data;
+        return next();
+    })
+    .catch(err => next({err}))
 
 }
+
+controller.getQuestionsWithComments2 = (req, res, next) => {
+    /*
+    const peopleQuery = 'SELECT p.*, s.name AS species, h.name AS homeworld' + 
+ ' FROM people p LEFT OUTER JOIN  species s' + ' ON p.species_id =s._id' 
+ + ' LEFT OUTER JOIN planets h' + ' ON p.homeworld_id = h._id;'
+*/  
+    //this is the _id of the question
+    const id = res.locals.getQuestionsWithComments._id;
+
+    const query = `SELECT c.*, u.username AS comment_author 
+    FROM comments c LEFT OUTER JOIN users u ON c.id_author=u._id WHERE c.id_question='${id}';`
+    
+    dataBase.query(query)
+    .then(data => data.rows)
+    .then(data => {
+        console.log(data);
+        res.locals.getQuestionsWithComments.comments = data;
+        return next();
+    })
+    .catch(err => next({err}))
+}
+
 
 // GET user info: function to get user profile from database
 
 // POST question: function to post question to database
 controller.postQuestion = (req, res, next) => {
+    
     const {title, content, author} = req.body;
     const userId = req.cookies.userid; //Author will just be the username from now on JUST IN CASE WE NEED IT
+    console.log(userId)
 
     //changed the schema so the current datetime is automatically added to the time_stamp column
     const queryString = `INSERT INTO questions
@@ -109,6 +142,7 @@ controller.postQuestion = (req, res, next) => {
         .then(data => data.rows)
         .then(data => {
             res.locals.postQuestion = data[0];
+            console.log(data[0])
             return next();
         }).catch(err => next({
             log: 'Middleware error in postQuestion',
@@ -136,8 +170,6 @@ controller.postComment = (req, res, next) => {
             log: 'Middleware error in postQuestion',
             message: { err: 'An error occured'}
         }));
-
-    
 }
 
 module.exports = controller;

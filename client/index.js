@@ -10,6 +10,7 @@ import QuestionAsk from './components/questionAsk.jsx';
 //style 
 import styles from './scss/stylish.css';
 import questionStyles from './scss/question.css';
+import jaredSteeze from './scss/jaredStyles.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

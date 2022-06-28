@@ -5,7 +5,7 @@ import CommentMaker from "./CommentMaker.jsx";
 
 function Question(props) {
   // this hook retrievieves the url parameter and stores it for querying use
-  const params = useParams(); // this is the id of the question which we can use to query the db
+  const params = useParams()['questionId']; // this is the id of the question which we can use to query the db
   // initializing state to undefined values for now
   const [state, setState] = useState({
     questionTitle: "Default Title",
@@ -14,47 +14,44 @@ function Question(props) {
     timeStamp: "right now",
   });
 
-  const [comments, setComments] = useState([
-    { username: "toast", content: "heres a solution" },
-  ]);
+  const [comments, setComments] = useState([]);
 
   const navigate = useNavigate();
   const backToQuestionList = function () {
     console.log("Navigating to questionList");
     return navigate("/questions", { replace: true }), [navigate];
   };
+  
+  useEffect(() => {
+    console.log('ATTEMPTING TO FETCH FROM: ', params);
+    fetch(`/question/${params}`)
+      .then((response) => {
+        console.log("Verified: recieved response from server.");
+        return response.json();
+      })
+      .then((data) => {
+        // do something
+        setState({
+          // just as demo
+          questionTitle: 'no title yet',
+          questionAuthor: data.question_author,
+          questionContent: data.q_content,
+          timeStamp: data.time_stamp
+        });
 
-  // useEffect(() => {
-  //   fetch(`/question/${params}`)
-  //     .then((response) => {
-  //       console.log("Verified: recieved response from server.");
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       // do something
-  //       setState({
-  //         // just as demo
-  //         questionTitle: data.title,
-  //         questionAuthor: data.author,
-  //         questionContent: data.content,
-  //         timeStamp: data.timeStamp
-  //       });
-
-  //       setComments(data.comments);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
-  console.log(state);
+        setComments(data.comments);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const commentElements = [];
   for (const c of comments) {
     commentElements.push(
       <Comment
-        username={c.username}
-        content={c.content}
+        username={c.comment_author}
+        content={c.c_content}
         timeStamp={c.time_stamp}
       />
     );

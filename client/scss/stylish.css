@@ -13,11 +13,54 @@ body {
 
 .LoginSignup h1 {
   font-size: 100px;
+  
 }
 
-.LoginSignup .signupBox {
-  background-color: white;
+/* .LoginSignup .signupBox {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+} */
+
+.signupBox {
+  display: flex;
+  flex-direction: column;
+  /* background-color: pink; */
+  align-items: right;
+
+}
+
+.input_field {
+  height: 30px;
+  width: 180px;
+  padding-left: 10px;
+}
+
+.submit_button {
+  background-color: #008CBA; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 15px;
+  margin-bottom: 35px;
+  float: right;
+
+}
+
+
+button {
+  background-color: #e7e7e7; /* Green */
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 15px;
+  float: right;
 }
