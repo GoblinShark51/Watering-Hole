@@ -58,10 +58,10 @@ function QuestionList() {
             <h1>...WateringHole</h1>
             <h2>Questions</h2>
         </header>
-        <button id='ask-btn' onClick={askButtonHandler}>Ask Question</button>
         <div id='question-list-container'>
             {ql}
         </div>
+        <button id='ask-btn' onClick={askButtonHandler}>Ask Question</button>
       </div>
     );
 }
