@@ -55,6 +55,7 @@ function LoginSignup() {
       <div className='LoginSignup'>
         <h1>Welcome to the WateringHole</h1>
         <div className='signupBox'>
+          {hasAccount ? <h2>Log in</h2> : <h2>Sign up</h2>}
           <form
             onSubmit={(event) => {
               event.preventDefault();
