@@ -80,7 +80,6 @@ controller.getQuestions = (req, res, next) => {
   comments: [{id: id, author: theirname, content: theirtext, timestamp: time}]
 }
 */
-<<<<<<< HEAD
 controller.getQuestionsWithComments1 = (req, res, next) => {
     /*
     const peopleQuery = 'SELECT p.*, s.name AS species, h.name AS homeworld' + 
@@ -122,38 +121,8 @@ controller.getQuestionsWithComments2 = (req, res, next) => {
         return next();
     })
     .catch(err => next({err}))
-
 }
-=======
-controller.getQuestionsWithComments = (req, res, next) => {
-/*
-const peopleQuery = 'SELECT p.*, s.name AS species, h.name AS homeworld' + 
- ' FROM people p LEFT OUTER JOIN  species s' + ' ON p.species_id =s._id' 
- + ' LEFT OUTER JOIN planets h' + ' ON p.homeworld_id = h._id;';
-*/
 
-    // const {question_id} = req.body;
-    // console.log(req.body);
-    // q._id, u.username AS questionAuthor, q.q_content, q.time_stamp, c.  WHERE u.username = q.id_author
-    //RETURN INFO ABOUT THE QUESTION WITHOUT THE COMMENT INFO YET
-    //q._id, title, author, content, timstamp
-    // const query = `SELECT  q._id, u.username AS  questionAuthor, q.q_content, q.time_stamp
-    // FROM questions q LEFT OUTER JOIN 
-    // INNER JOIN users u ON c.id_author = u._id 
-    // INNER JOIN questions q ON c.id_question = c._id`
-    
-    // dataBase.query(query)
-    // .then(data => {
-    //     // console.log(data.rows);
-    //     res.locals.getQuestions = data.rows;
-
-    //     console.log(res.locals.getQuestions);
-    //     next();
-    // })
-    // .catch(err => console.log(err))
-    // next();
-};
->>>>>>> dev
 
 // GET user info: function to get user profile from database
 
@@ -201,8 +170,6 @@ controller.postComment = (req, res, next) => {
             log: 'Middleware error in postQuestion',
             message: { err: 'An error occured'}
         }));
-
-    
 }
 
 module.exports = controller;
