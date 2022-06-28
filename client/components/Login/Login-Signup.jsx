@@ -52,37 +52,36 @@ function LoginSignup() {
   return (
     // using fragment as a wrapper instead of a div as to not have ajacent elements
     <React.Fragment>
-      <div className='LoginSignup'>
-        <h1>Welcome to the WateringHole</h1>
-        <div className='signupBox'>
-          <h2>{hasAccount ? 'Log in' : 'Sign up'}</h2>
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              handleClick(event);
-            }}
-          >
-            <input type='text' name='username' />
-            <br />
-            <br />
-            <input type='text' name='password' />
-            <br />
-            {/* this is just here because I can't figure out how to wrap a submite button with the link tag */}
-            <input type='submit' name='' id='' />
-          </form>
-          {username}
 
-          {/* conditionaly rendering a diferrent element and content depending on the state */}
-          {hasAccount ? (
-            <div>
-              Don't have an account yet?
-              <br />
-              <button type='submit' onClick={() => sethasAccount(false)}>
-                Sign Up
-              </button>
-            </div>
-          ) : (
-            <div>
+    <div className='LoginSignup'>
+      <h1>Welcome to the WateringHole</h1>
+      <div className='signupBox'>
+      <h2>{hasAccount ? 'Log in' : 'Sign up'}</h2>
+        <form onSubmit={(event) => {
+          event.preventDefault();
+          handleClick(event)
+        }}>
+          <input className="input_field" placeholder="username" type='text' name='username' />
+          <br />
+          <br />
+          <input className="input_field" placeholder="password" type='text' name='password' />
+          <br />
+          {/* this is just here because I can't figure out how to wrap a submite button with the link tag */}
+          <input className="submit_button" type="submit" name="" id="" />
+        </form>
+        {username}
+      
+      {/* conditionaly rendering a diferrent element and content depending on the state */}
+      {hasAccount ? (
+        <div>
+          Don't have an account yet?
+          <br />
+          <button type='submit' onClick={() => sethasAccount(false)}>
+            Sign Up
+          </button>
+        </div>
+      ) : (
+        <div>
               Already have an account?
               <br />
               <button type='submit' onClick={() => sethasAccount(true)}>
