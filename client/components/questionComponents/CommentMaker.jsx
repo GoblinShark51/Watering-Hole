@@ -58,16 +58,17 @@ function CommentMaker(props) {
     }
 
     return (
-      <form onSubmit={makeCommentHandler}>
+      <form className='commentMaker' onSubmit={makeCommentHandler}>
         <label for='comment'>Details:</label>
         <textarea
+        className='comment-maker-text'
         id='comment'
         name='comment'
         >
         Comment goes here!
         </textarea>
 
-        <input type='submit' value='Submit'/>
+        <input className='comment-submit-btn' type='submit' value='Submit'/>
       </form> 
     );
 }

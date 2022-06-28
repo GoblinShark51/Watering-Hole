@@ -59,26 +59,30 @@ function Question(props) {
 
   return (
     <React.Fragment>
-      <div className="question-container">
-        <button id="back-to-questionlist-btn" onClick={backToQuestionList}>
-          Back
-        </button>
-        <h3 className="question-title">{state.questionTitle}</h3>
-        <p>Author: {state.questionAuthor} </p>
-        <p>{state.timeStamp}</p>
-        <br />
-        <p>{state.questionContent}</p>
+      <div className='question-page-body'>
+          <button id="back-to-questionlist-btn" onClick={backToQuestionList}>
+            Back
+          </button>
+          
+        <div className="question-container">
+          <h3 className="question-title">{state.questionTitle}</h3>
+          <p className="question-subinfo">Author: {state.questionAuthor} | {state.timeStamp}</p>
+          <div className="question-content">
+            {state.questionContent}
+          </div>
+        </div>
+
+        <div className="comments-container">
+          <h2>Comments</h2>
+          {commentElements}
+        </div>
+        <h2>Comment Maker</h2>
+        <CommentMaker
+          questionId={params}
+          oldComments={comments}
+          updateComments={setComments}
+        />
       </div>
-      <div className="comments-container">
-        <h2>Comments</h2>
-        {commentElements}
-      </div>
-      <h2>Comment Maker</h2>
-      <CommentMaker
-        questionId={params}
-        oldComments={comments}
-        updateComments={setComments}
-      />
     </React.Fragment>
 
     // probably can render a list of comment components here if there are any comments
