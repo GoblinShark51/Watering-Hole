@@ -55,7 +55,8 @@ function QuestionList() {
     return (
       <div id='page-question-list'>
         <header id='question-list-header'>
-            <h1>Questions</h1>
+            <h1>...WateringHole</h1>
+            <h2>Questions</h2>
         </header>
         <button id='ask-btn' onClick={askButtonHandler}>Ask Question</button>
         <div id='question-list-container'>
