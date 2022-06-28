@@ -31,9 +31,6 @@ function CommentMaker(props) {
           return response.json();
         })
         .then((data) => {
-          // do something
-          console.log('Posted comment: ', sendData);
-
           //{ author: "we dont use the author part of the body anymore", content: "I am placing a comment without thinking about the consequences.", question_id: "1" }
           //SHOULD BE LIKE: 
           /*
@@ -46,11 +43,15 @@ function CommentMaker(props) {
             "comment_author": "Tran"
           },
           */
-          props.oldComments.push({
-            c_content: data.content,
-            comment_author: data.author
-          });
-          props.updateComments(props.oldComments);
+
+          const newComment = {};
+          newComment.c_content = data.c_content;
+          newComment.comment_author = 'YOU, DUMMY';
+          props.oldComments.push(newComment);
+
+          props.updateComments([...props.oldComments]);
+
+          console.log('Posted new comment: ', newComment);
         })
         .catch((err) => {
           console.log(err);

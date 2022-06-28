@@ -63,3 +63,10 @@
 .comment-submit-btn {
     margin: 20px;
 }
+
+.comment-container {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+
+    background-color: white;
+}
